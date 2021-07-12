@@ -13,6 +13,10 @@ function Navigation(props) {
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/charts">Charts</Nav.Link>
                 </Nav>
+                <Navbar.Text>
+                    Signed in as: <span className='font-weight-bold' style={{color:'green'}}>Scout</span>
+                    <a href="/login" className='ml-5'>Logout</a>
+                </Navbar.Text>
             </Navbar.Collapse>
         </Navbar>
     );

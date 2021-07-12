@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import './App.css';
 import Axios from './Util/Axios';
@@ -10,6 +10,9 @@ import RegisterView from "./Components/RegisterView";
 import ChartsView from "./Components/ChartsView";
 
 function App() {
+
+    const [user, setUser] = useState({})
+    const [talentData, setTalentData] = useState({})
 
   return (
 
@@ -28,11 +31,11 @@ function App() {
                     </Route>
 
                     <Route path="/" exact>
-                        <HomeView/>
+                        <HomeView talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
                     </Route>
 
                     <Route path="/charts" >
-                        <ChartsView/>
+                        <ChartsView talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
                     </Route>
                 </Switch>
             </div>

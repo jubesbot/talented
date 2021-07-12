@@ -3,36 +3,35 @@ import {Redirect} from "react-router-dom";
 import axios from "axios";
 import {Form, Row, Col, Container} from "react-bootstrap";
 
-function HomeView(props) {
+function HomeView(talentData, setTalentData, user, setUser) {
     const form = useRef(null)
-    const [user, setUser] = useState({})
-    const [talentData, setTalentData] = useState({})
-
-    useEffect(() => {
-        async function setUserStats() {
-            try {
-                let {data} = await axios.get("http://localhost:8000/users/", {
-                    headers: {
-                        authorization: `Bearer ${localStorage.token}`
-                    }
-                })
-                console.log(data)
-                setUser(data.user)
-
-            } catch (e) {
-                setUser({})
-                localStorage.removeItem("token")
-            }
-        }
-
-        setUserStats()
-    }, [])
 
 
-    useEffect(() =>{
-        setTalentData({scout : user})
-        // console.log(post)
-    },[user])
+    // useEffect(() => {
+    //     async function setUserStats() {
+    //         try {
+    //             let {data} = await axios.get("http://localhost:8000/users/", {
+    //                 headers: {
+    //                     authorization: `Bearer ${localStorage.token}`
+    //                 }
+    //             })
+    //             console.log(data.user)
+    //             setUser(data.user)
+    //
+    //         } catch (e) {
+    //             setUser({})
+    //             localStorage.removeItem("token")
+    //         }
+    //     }
+    //
+    //     setUserStats()
+    // }, [])
+    //
+    //
+    // // useEffect(() =>{
+    // //     setTalentData({scout : user})
+    // //     // console.log(post)
+    // // },[user])
 
     // useEffect(() => {
     //     async function getUser() {

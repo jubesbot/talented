@@ -26,3 +26,10 @@ class SportViewSet(viewsets.ModelViewSet):
     """
     queryset = Sport.objects.all().order_by('sport')
     serializer_class = SportSerializer
+
+    def get_queryset(self):
+        queryset = Sport.objects.all()
+        sport = self.request.query_params.get('sport', None)
+        if sport is not None:
+            queryset = queryset.filter(sport=sport)
+        return queryset
