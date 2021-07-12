@@ -55,19 +55,18 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
         }
     }
 
-    // async function getSport() {
-    //     try {
-    //         let {data} = await axios.get(`http://localhost:8000/sports/${sportId}`)
-    //         setSportData(data)
-    //     } catch (e) {
-    //         console.log(e.response)
-    //     }
-    // }
+    async function getSport() {
+        try {
+                let {data} = await axios.get(`http://localhost:8000/sports/${sportId}`)
+                console.log(data)
+                setSportData(data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
 
     useEffect(() => {
-
-        // getSport()
-
+        getSport()
         getAllSports()
 
     }, [])
@@ -102,7 +101,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
                         </Row>
                     </Form>
 
-                    {(sportId > 0) &&
+                    {(sportData) &&
                     <Radar
                         width={500} height={500} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                         if (point) {
