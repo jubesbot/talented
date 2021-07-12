@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from .models import Talent, Sport
 from rest_framework import serializers
 
+owner = serializers.ReadOnlyField(source='owner.username')
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
