@@ -97,7 +97,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     console.log(allTalents.length)
 
     return (
-        <div >
+        <div className='vh-100'>
 
             <Form method="get" onSubmit={getOneTalent}>
                 <Row>
@@ -122,7 +122,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
             </Form>
 
             <Row className='border border-warning'>
-                <Col className='col-sm-12 col-xs-12 col-md-12 col-lg-6 border border-primary mx-auto'>
+                <Col className='col-sm-12 col-xs-12 col-md-12 col-lg-9 border border-primary mx-auto'>
                     <ChartsAllSportsView
                         sportData={sportData}
                         setSportData={setSportData}
@@ -138,7 +138,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
                         setAllTalents={setAllTalents}
                     />
                 </Col>
-                <Col className='col-sm-12  col-xs-12  col-md-12 col-lg-6 border border-primary mx-auto'>
+                <Col className='col-sm-12  col-xs-12  col-md-12 col-lg-3 border border-primary mx-auto'>
                     <ChartsSuggestedView
                         sportData={sportData}
                         setSportData={setSportData}

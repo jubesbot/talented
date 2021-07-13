@@ -53,35 +53,6 @@ function ChartsSuggestedView({
             if (Math.abs((talentData.attribute_analytic_aptitude) - (allSports[i].attribute_analytic_aptitude)) < 2){
                 temp.push(allSports[i].sport)
             }
-
-            // if (talentData.attribute_strength - 1 > allSports[i].attribute_strength) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_power - 1 > allSports[i].attribute_power) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_speed - 1 > allSports[i].attribute_speed) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_agility - 1 > allSports[i].attribute_agility) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_flexibility - 1 > allSports[i].attribute_flexibility) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_nerve - 1 > allSports[i].attribute_nerve) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_durability - 1 > allSports[i].attribute_durability) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_handeye_coordination - 1 > allSports[i].attribute_handeye_coordination) {
-            //     temp.push(allSports[i].sport)
-            // }
-            // if (talentData.attribute_analytic_aptitude - 1 > allSports[i].attribute_analytic_aptitude) {
-            //     temp.push(allSports[i].sport)
-            // }
-
         }
 
          function suggestedSports(arr,count){
@@ -89,7 +60,7 @@ function ChartsSuggestedView({
                 arr.filter(a => a === x).length >= count
             )
         }
-        setSearch(suggestedSports(temp,6))
+        setSearch(suggestedSports(temp,5))
     }
     console.log(search)
 
