@@ -42,7 +42,7 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                 </Row>
             </Form>
 
-            {(sportData && talentData) &&
+            {(sportData && talentData && talentData.id) ?
             <Radar
                 width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
@@ -99,7 +99,7 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                         },
                     ],
                 }}
-            />
+            /> : <>Rendering...</>
             }
 
         </div>

@@ -14,7 +14,7 @@ function ChartsSuggestedView({sportData, setSportData, allSports, setAllSports, 
                 <h3>blank space</h3>
             </div>
 
-            {(sportData && talentData) &&
+            {(sportData && talentData && talentData.id) ?
             <Radar width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
                     console.log('hovered over a data point');
@@ -78,6 +78,7 @@ function ChartsSuggestedView({sportData, setSportData, allSports, setAllSports, 
                    }}
 
             />
+                : <>Rendering...</>
             }
 
         </div>

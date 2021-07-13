@@ -92,6 +92,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     console.log(talentId)
     console.log(sportId)
     console.log(sportData)
+    console.log(talentData)
     console.log(allSports.length)
     console.log(allTalents.length)
 
