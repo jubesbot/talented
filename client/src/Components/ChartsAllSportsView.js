@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import axios from "axios";
 
@@ -17,32 +17,72 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
         }
     }
 
+    async function getOneTalent(e) {
+        e.preventDefault()
+        try {
+            let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
+            console.log(data)
+            await setTalentData(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async function handleChange(e){
+        setTalentId(e.target.value);
+    }
+
     return (
         <div>
+            <Row className='p-3'>
+                <Col className='md-6'>
+                <Form method="get" onSubmit={getOneTalent}>
+                    <Row>
+                        <Col>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Label className='h4'>Select Talent<span className='circle talent'></span></Form.Label>
+                                <Form.Control as="select" value={talentId} onChange={handleChange}>
+                                    {(allTalents && allTalents.length > 0) &&
+                                    allTalents.map((talent) => (
+                                        <option key={talent.id} value={talent.id}>{talent.talent_name}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                            <Button type="submit" className="btn text-center btn-sm talent">Get Talent
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
+                </Col>
+                <Col className='md-6'>
+                <Form method="get" onSubmit={getOneSport}>
+                    <Row>
+                        <Col>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Label className='h4'>Select Sport<span className='circle sport'></span></Form.Label>
+                                <Form.Control as="select" value={sportId} onChange={e => {
+                                    // console.log("e.target.value", typeof e.target.value);
+                                    // getOneSport(e)
+                                    setSportId(e.target.value);
+                                }}>
+                                    {(allSports && allSports.length > 0) &&
+                                    allSports.map((sport) => (
+                                        <option key={sport.id} value={sport.id}>{sport.sport}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                            <Button type="submit" className="btn text-center btn-sm sport">Get Sport
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
+                </Col>
+            </Row>
 
-            <Form method="get" onSubmit={getOneSport}>
-                <Row>
-                    <Col>
-                        <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label className='h4'>Select Sport</Form.Label>
-                            <Form.Control as="select" value={sportId} onChange={e => {
-                                // console.log("e.target.value", typeof e.target.value);
-                                // getOneSport(e)
-                                setSportId(e.target.value);
-                            }}>
-                                {(allSports && allSports.length > 0) &&
-                                allSports.map((sport) => (
-                                    <option key={sport.id} value={sport.id}>{sport.sport}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        <button type="submit" className="btn border-dark text-center btn-sm">Get Sport
-                        </button>
-                    </Col>
-                </Row>
-            </Form>
-
+            <Row className='h-auto'>
+                <Col className='col-md-7 mx-auto'>
             {(sportData && talentData && talentData.id) ?
+
             <Radar
                 width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
@@ -101,6 +141,8 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                 }}
             /> : <>Rendering...</>
             }
+                    </Col>
+                </Row>
 
         </div>
     );

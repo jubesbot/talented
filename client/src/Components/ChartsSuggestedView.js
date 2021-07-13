@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Radar from "react-d3-radar";
-import {Button, Col} from "react-bootstrap";
+import {Button, Col, ListGroup} from "react-bootstrap";
 
 function ChartsSuggestedView({
                                  sportData,
@@ -17,9 +17,9 @@ function ChartsSuggestedView({
                                  setTalentId
                              }) {
 
-    const [search, setSearch] = useState({})
+    const [filter, setFilter] = useState({})
 
-    function filterSearch() {
+    function suggestSport() {
         let temp = []
 
         for (let i = 0; i < allSports.length; i++) {
@@ -55,94 +55,31 @@ function ChartsSuggestedView({
             }
         }
 
-         function suggestedSports(arr,count){
+         function setLeniency(arr,count){
             return [...new Set(arr)].filter(x =>
                 arr.filter(a => a === x).length >= count
             )
         }
-        setSearch(suggestedSports(temp,5))
+        setFilter(setLeniency(temp,5))
     }
-    console.log(search)
+    console.log(filter)
 
 return (
     <div>
-        <Button onClick={filterSearch}>Button</Button>
         <div className='header'>
-            <h4 className='title'>Based on {talentData.talent_name}'s top attributes,<br/> the suggested sports are:</h4>
-            {(search && search.length > 0) &&
-            search.map((sport) => (
-                <ul key={sport.id}>{sport}</ul>
+            <h4 className='title m-3'>Find out what are some of {talentData.talent_name}'s suggested sports!</h4>
+            <Button className='btn text-center btn-sm suggest' onClick={suggestSport}>Get Suggestions</Button>
+            <div className='scroll mt-3'>
+            {(filter && filter.length > 0) &&
+            filter.map((sport) => (
+                <ListGroup className='p-2'>
+                <ListGroup.Item variant='danger' key={sport.id}>{sport}</ListGroup.Item>
+                </ListGroup>
             ))}
+            </div>
         </div>
         <div>
         </div>
-
-        {/*{(sportData && talentData && talentData.id) ?*/}
-        {/*    <Radar width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {*/}
-        {/*        if (point) {*/}
-        {/*            console.log('hovered over a data point');*/}
-        {/*        } else {*/}
-        {/*            console.log('not over anything');*/}
-        {/*        }*/}
-        {/*    }}*/}
-        {/*           data={{*/}
-        {/*               variables: [*/}
-        {/*                   {key: 'attribute_endurance', label: 'Endurance'},*/}
-        {/*                   {key: 'attribute_strength', label: 'Strength'},*/}
-        {/*                   {key: 'attribute_power', label: 'Power'},*/}
-        {/*                   {key: 'attribute_speed', label: 'Speed'},*/}
-        {/*                   {key: 'attribute_agility', label: 'Agility'},*/}
-        {/*                   {key: 'attribute_flexibility', label: 'Flexibility'},*/}
-        {/*                   {key: 'attribute_nerve', label: 'Nerve'},*/}
-        {/*                   {key: 'attribute_durability', label: 'Durability'},*/}
-        {/*                   {key: 'attribute_handeye_coordination', label: 'Hand-eye Coordination'},*/}
-        {/*                   {key: 'attribute_analytic_aptitude', label: 'Analytic Aptitude'},*/}
-        {/*               ],*/}
-        {/*               sets: [*/}
-        {/*                   {*/}
-        {/*                       key: '',*/}
-        {/*                       label: '',*/}
-        {/*                       values: {},*/}
-        {/*                   },*/}
-        {/*                   {*/}
-        {/*                       key: 'talent',*/}
-        {/*                       label: 'Talent',*/}
-        {/*                       values: {*/}
-        {/*                           attribute_endurance: talentData.attribute_endurance,*/}
-        {/*                           attribute_strength: talentData.attribute_strength,*/}
-        {/*                           attribute_power: talentData.attribute_power,*/}
-        {/*                           attribute_speed: talentData.attribute_speed,*/}
-        {/*                           attribute_agility: talentData.attribute_agility,*/}
-        {/*                           attribute_flexibility: talentData.attribute_flexibility,*/}
-        {/*                           attribute_nerve: talentData.attribute_nerve,*/}
-        {/*                           attribute_durability: talentData.attribute_durability,*/}
-        {/*                           attribute_handeye_coordination: talentData.attribute_handeye_coordination,*/}
-        {/*                           attribute_analytic_aptitude: talentData.attribute_analytic_aptitude,*/}
-        {/*                       },*/}
-        {/*                   },*/}
-        {/*                   {*/}
-        {/*                       key: 'sport',*/}
-        {/*                       label: 'Sport',*/}
-        {/*                       values: {*/}
-        {/*                           attribute_endurance: 10,*/}
-        {/*                           attribute_strength: 9,*/}
-        {/*                           attribute_power: 3,*/}
-        {/*                           attribute_speed: 4,*/}
-        {/*                           attribute_agility: 5,*/}
-        {/*                           attribute_flexibility: 3,*/}
-        {/*                           attribute_nerve: 2,*/}
-        {/*                           attribute_durability: 8,*/}
-        {/*                           attribute_handeye_coordination: 9,*/}
-        {/*                           attribute_analytic_aptitude: 4,*/}
-        {/*                       },*/}
-        {/*                   },*/}
-
-        {/*               ],*/}
-        {/*           }}*/}
-
-        {/*    />*/}
-        {/*    : <>Rendering...</>*/}
-        {/*}*/}
 
     </div>
 );

@@ -70,17 +70,6 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
         }
     }
 
-    async function getOneTalent(e) {
-        e.preventDefault()
-        try {
-            let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
-            console.log(data)
-            await setTalentData(data)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     useEffect(() => {
         getAllTalents()
         getSport()
@@ -97,29 +86,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     console.log(allTalents.length)
 
     return (
-        <div className='vh-100'>
-
-            <Form method="get" onSubmit={getOneTalent}>
-                <Row>
-                    <Col>
-                        <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label className='h4'>Select Talent</Form.Label>
-                            <Form.Control as="select" value={talentId} onChange={e => {
-                                // console.log("e.target.value", typeof e.target.value);
-                                // getOneSport(e)
-                                setTalentId(e.target.value);
-                            }}>
-                                {(allTalents && allTalents.length > 0) &&
-                                allTalents.map((talent) => (
-                                    <option key={talent.id} value={talent.id}>{talent.talent_name}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        <button type="submit" className="btn border-dark text-center btn-sm">Get Talent
-                        </button>
-                    </Col>
-                </Row>
-            </Form>
+        <div>
 
             <Row className='border border-warning'>
                 <Col className='col-sm-12 col-xs-12 col-md-12 col-lg-9 border border-primary mx-auto'>

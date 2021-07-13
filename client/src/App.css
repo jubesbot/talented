@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #FDFFFC;
+  max-height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +37,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.circle {
+  display: inline-flex;
+  margin-left: 20px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+.sport {
+  background-color: rgba(31,119,180,0.4);
+  border: 1px solid rgba(0,0,0,0.3);
+  color: black;
+  z-index: -1;
+}
+
+.talent{
+  background-color: rgba(255,127,14,0.4);
+  border: 1px solid rgba(0,0,0,0.3);
+  color: black;
+  z-index: -1;
+}
+
+.suggest{
+  background-color: rgba(120,192,145,0.4);
+  border: 1px solid rgba(0,0,0,0.3);
+  color: black;
+  z-index: -1;
+}
+
+.scroll{
+  max-height: 75vh;
+  overflow-y: scroll;
 }
