@@ -3,25 +3,7 @@ import {Col, Form, Row} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import axios from "axios";
 
-function ChartsAllSportsView() {
-    const [allSports, setAllSports] = useState({})
-    const [sportId, setSportId] = useState('61')
-    const [sportData, setSportData] = useState({
-        id: 61,
-        sport: "Boxing",
-        attribute_endurance: 8.63,
-        attribute_strength: 8.13,
-        attribute_power: 8.63,
-        attribute_agility: 6.25,
-        attribute_flexibility: 4.38,
-        attribute_nerve: 8.88,
-        attribute_durability: 8.50,
-        attribute_handeye_coordination: 7.00,
-        attribute_analytic_aptitude: 5.63,
-        total: 72.38,
-    })
-    //nothing yet
-
+function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId}) {
     //to work with the form selector
 
     async function getOneSport(e) {
@@ -34,43 +16,6 @@ function ChartsAllSportsView() {
             console.log(e)
         }
     }
-
-    //  function change(e) {
-    //     setSportData(() => (e.target.value))
-    //     console.log(sportData)
-    // }
-
-    //renders one sport for the chart on page load
-
-    async function getAllSports() {
-
-        try {
-            let {data} = await axios.get(`http://localhost:8000/sports/`)
-            await setAllSports(data)
-        } catch (e) {
-            console.log(e.response)
-        }
-    }
-
-    async function getSport() {
-        try {
-            let {data} = await axios.get(`http://localhost:8000/sports/${sportId}`)
-            console.log(data)
-            await setSportData(data)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    useEffect(() => {
-        getSport()
-        getAllSports()
-
-    }, [])
-
-    console.log(sportId)
-    console.log(sportData)
-    console.log(allSports.length)
 
     return (
         <div>
@@ -97,7 +42,7 @@ function ChartsAllSportsView() {
                 </Row>
             </Form>
 
-            {(sportData) &&
+            {(sportData && talentData) &&
             <Radar
                 width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
@@ -140,16 +85,16 @@ function ChartsAllSportsView() {
                             key: 'talent',
                             label: 'Talent',
                             values: {
-                                attribute_endurance: 4,
-                                attribute_strength: 6,
-                                attribute_power: 7,
-                                attribute_speed: 2,
-                                attribute_agility: 8,
-                                attribute_flexibility: 1,
-                                attribute_nerve: 2,
-                                attribute_durability: 8,
-                                attribute_handeye_coordination: 1,
-                                attribute_analytic_aptitude: 1,
+                                attribute_endurance: talentData.attribute_endurance,
+                                attribute_strength: talentData.attribute_strength,
+                                attribute_power: talentData.attribute_power,
+                                attribute_speed: talentData.attribute_speed,
+                                attribute_agility: talentData.attribute_agility,
+                                attribute_flexibility: talentData.attribute_flexibility,
+                                attribute_nerve: talentData.attribute_nerve,
+                                attribute_durability: talentData.attribute_durability,
+                                attribute_handeye_coordination: talentData.attribute_handeye_coordination,
+                                attribute_analytic_aptitude: talentData.attribute_analytic_aptitude,
                             },
                         },
                     ],

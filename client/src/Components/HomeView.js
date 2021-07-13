@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import axios from "axios";
 import {Form, Row, Col, Container} from "react-bootstrap";
 
-function HomeView(talentData, setTalentData, user, setUser) {
+function HomeView({talentData, setTalentData, user, setUser}) {
     const form = useRef(null)
 
 
@@ -59,10 +59,16 @@ function HomeView(talentData, setTalentData, user, setUser) {
         }
     }
 
-    function change(e) {
-        setTalentData(prevState => ({...prevState, [e.target.name]: e.target.value}))
-        console.log(talentData)
+
+    async function change(e) {
+        try {
+            await setTalentData(prevState => ({...prevState, [e.target.name]: e.target.value}))
+            console.log(talentData)
+        } catch (e) {
+            console.log(e)
+        }
     }
+
 
     return (
         <div>

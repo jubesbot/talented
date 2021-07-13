@@ -2,13 +2,19 @@ import React from 'react';
 import Radar from "react-d3-radar";
 import {Col} from "react-bootstrap";
 
-function ChartsMappedView(props) {
+function ChartsSuggestedView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId}) {
     return (
         <div>
 
             <div className='header'>
-                <h4 className='title'>Recommended Sport:</h4>
+                <h4 className='title'>Suggested Sport:</h4>
             </div>
+            <div>
+                <h2>blank space</h2>
+                <h3>blank space</h3>
+            </div>
+
+            {(sportData && talentData) &&
             <Radar width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
                     console.log('hovered over a data point');
@@ -30,10 +36,30 @@ function ChartsMappedView(props) {
                            {key: 'attribute_analytic_aptitude', label: 'Analytic Aptitude'},
                        ],
                        sets: [
-
+                           {
+                               key: '',
+                               label: '',
+                               values: {},
+                           },
                            {
                                key: 'talent',
                                label: 'Talent',
+                               values: {
+                                   attribute_endurance: talentData.attribute_endurance,
+                                   attribute_strength: talentData.attribute_strength,
+                                   attribute_power: talentData.attribute_power,
+                                   attribute_speed: talentData.attribute_speed,
+                                   attribute_agility: talentData.attribute_agility,
+                                   attribute_flexibility: talentData.attribute_flexibility,
+                                   attribute_nerve: talentData.attribute_nerve,
+                                   attribute_durability: talentData.attribute_durability,
+                                   attribute_handeye_coordination: talentData.attribute_handeye_coordination,
+                                   attribute_analytic_aptitude: talentData.attribute_analytic_aptitude,
+                               },
+                           },
+                           {
+                               key: 'sport',
+                               label: 'Sport',
                                values: {
                                    attribute_endurance: 10,
                                    attribute_strength: 9,
@@ -47,28 +73,15 @@ function ChartsMappedView(props) {
                                    attribute_analytic_aptitude: 4,
                                },
                            },
-                           {
-                               key: 'sport',
-                               label: 'Sport',
-                               values: {
-                                   attribute_endurance: 4,
-                                   attribute_strength: 6,
-                                   attribute_power: 7,
-                                   attribute_speed: 2,
-                                   attribute_agility: 8,
-                                   attribute_flexibility: 1,
-                                   attribute_nerve: 2,
-                                   attribute_durability: 8,
-                                   attribute_handeye_coordination: 1,
-                                   attribute_analytic_aptitude: 1,
-                               },
-                           },
+
                        ],
                    }}
+
             />
+            }
 
         </div>
     );
 }
 
-export default ChartsMappedView;
+export default ChartsSuggestedView;
