@@ -3,8 +3,9 @@ import {Col, Form, Row} from "react-bootstrap";
 import Axios from "../Util/Axios";
 import ChartsAllSportsView from "./ChartsAllSportsView";
 import ChartsSuggestedView from "./ChartsSuggestedView";
+import {Redirect} from "react-router-dom";
 
-function ChartsView({talentData, setTalentData, user, setUser}) {
+function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn}) {
 
     const [allTalents, setAllTalents] = useState({})
     const [allSports, setAllSports] = useState({})
@@ -69,7 +70,16 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
         }
     }
 
+    console.log(talentData)
+
     useEffect(() => {
+        if (loggedIn){
+            console.log('logged in cos I got both tokens :)')
+            setTalentData(prevState => ({...prevState, scout_id: user.id}))
+        }else{
+            console.log('not logged in cos I no tokens :(')
+            return < Redirect to="/login" />
+        }
         getAllTalents()
         getSport()
         getAllSports()

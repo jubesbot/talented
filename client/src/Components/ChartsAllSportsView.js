@@ -3,7 +3,7 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import Axios from "../Util/Axios";
 
-function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId}) {
+function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId, loggedIn, setLoggedIn}) {
     //to work with the form selector
  const [isLoading, setIsLoading] = useState(false)
     async function getOneSport(e) {

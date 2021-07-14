@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import './App.css';
 import Axios from './Util/Axios';
@@ -11,6 +11,7 @@ import ChartsView from "./Components/ChartsView";
 
 function App() {
 
+    const [loggedIn, setLoggedIn] = useState((localStorage.access && localStorage.refresh) ? true : false)
     const [user, setUser] = useState({})
     const [talentData, setTalentData] = useState({
         attribute_endurance: 1,
@@ -25,6 +26,17 @@ function App() {
         attribute_analytic_aptitude: 1,
     })
 
+    useEffect(() => {
+            if (loggedIn){
+                console.log('logged in cos I got both tokens :)')
+                setTalentData(prevState => ({...prevState, scout_id: user.id}))
+            }else{
+                console.log('not logged in cos I no tokens :(')
+                return < redirect push to="/login" />
+            }
+    }, [])
+    console.log(talentData)
+
   return (
 
     <div className="App">
@@ -34,57 +46,23 @@ function App() {
             <div>
                 <Switch>
                     <Route path="/register" exact>
-                        <RegisterView/>
+                        <RegisterView loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} talentData={talentData} setTalentData={setTalentData}/>
                     </Route>
 
                     <Route path="/login" exact>
-                        <LoginView/>
+                        <LoginView loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} talentData={talentData} setTalentData={setTalentData}/>
                     </Route>
 
                     <Route path="/" exact>
-                        <HomeView talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
+                        <HomeView loggedIn={loggedIn} setLoggedIn={setLoggedIn} talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
                     </Route>
 
                     <Route path="/charts" >
-                        <ChartsView talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
+                        <ChartsView loggedIn={loggedIn} setLoggedIn={setLoggedIn} talentData={talentData} setTalentData={setTalentData} user={user} setUser={setUser}/>
                     </Route>
                 </Switch>
             </div>
         </BrowserRouter>
-
-
-
-      {/*<Container >*/}
-      {/*      <Form className='col-md-5 mx-auto'>*/}
-      {/*        <Form.Group className="mb-3" controlId="formBasicEmail">*/}
-      {/*          <Form.Label>Email address</Form.Label>*/}
-      {/*          <Form.Control type="email" placeholder="Enter email" />*/}
-      {/*          <Form.Text className="text-muted">*/}
-      {/*            We'll never share your email with anyone else.*/}
-      {/*          </Form.Text>*/}
-      {/*        </Form.Group>*/}
-
-      {/*        <Form.Group className="mb-3" controlId="formBasicUsername">*/}
-      {/*          <Form.Label>Username</Form.Label>*/}
-      {/*          <Form.Control type="username" placeholder="Enter username" />*/}
-      {/*        </Form.Group>*/}
-
-      {/*        <Form.Group className="mb-3" controlId="formBasicPassword">*/}
-      {/*          <Form.Label>Password</Form.Label>*/}
-      {/*          <Form.Control type="password" placeholder="Password" />*/}
-      {/*          <Form.Text className="text-muted">*/}
-      {/*            We'll never share your email with anyone else.*/}
-      {/*          </Form.Text>*/}
-      {/*        </Form.Group>*/}
-
-      {/*        <Button variant="primary" type="submit">*/}
-      {/*          Submit*/}
-      {/*        </Button>*/}
-      {/*      </Form>*/}
-      {/*</Container>*/}
-
-      {/*  <button onClick={() => login("admin", "admin")}>Login</button>*/}
-
 
     </div>
   );

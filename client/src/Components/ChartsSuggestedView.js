@@ -14,7 +14,9 @@ function ChartsSuggestedView({
                                  setAllTalents,
                                  talentId,
                                  setTalentData,
-                                 setTalentId
+                                 setTalentId,
+                                 loggedIn,
+                                 setLoggedIn
                              }) {
 
     const [filter, setFilter] = useState({})

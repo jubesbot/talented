@@ -4,7 +4,7 @@ import Axios from "../Util/Axios";
 import {Form, Row, Col, Container, Modal, Button} from "react-bootstrap";
 import {Slider, Typography} from "@material-ui/core";
 
-function HomeView({talentData, setTalentData, user, setUser}) {
+function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn}) {
     const form = useRef(null)
     const target = useRef(null)
 
@@ -13,46 +13,16 @@ function HomeView({talentData, setTalentData, user, setUser}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
-    // useEffect(() => {
-    //     async function setUserStats() {
-    //         try {
-    //             let {data} = await axios.get("http://localhost:8000/users/", {
-    //                 headers: {
-    //                     authorization: `Bearer ${localStorage.token}`
-    //                 }
-    //             })
-    //             console.log(data.user)
-    //             setUser(data.user)
-    //
-    //         } catch (e) {
-    //             setUser({})
-    //             localStorage.removeItem("token")
-    //         }
-    //     }
-    //
-    //     setUserStats()
-    // }, [])
-    //
-    //
-    // // useEffect(() =>{
-    // //     setTalentData({scout : user})
-    // //     // console.log(post)
-    // // },[user])
-
-    // useEffect(() => {
-    //     async function getUser() {
-    //         let {data} = await axios.get(`http://localhost:8000/${user._id}`)
-    //         if(data.user.pitches){
-    //             setPitch(data.user.pitches.reverse())
-    //         }else {
-    //             setPitch(null)
-    //         }
-    //     }
-    //
-    //     getPitch()
-    // }, [user, pitch])
-
+    useEffect(() => {
+        if (loggedIn){
+            console.log('logged in cos I got both tokens :)')
+            setTalentData(prevState => ({...prevState, scout_id: user.id}))
+        }else{
+            console.log('not logged in cos I no tokens :(')
+            return < Redirect to="/login" />
+        }
+    }, [])
+    console.log(talentData)
 
     async function submitTalent(e) {
         e.preventDefault(e)
@@ -105,7 +75,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*endurance slider*/}
                             <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_endurance', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_endurance', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Endurance</Form.Label>
                                 <p>The ability to continue to perform a skill or action for a sustained period
                                     of time.</p>
@@ -116,7 +86,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*strength slider*/}
                             <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_strength', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_strength', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Strength</Form.Label>
                                 <p>The ability to produce large forces.</p>
                             </Form.Group>
@@ -128,7 +98,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                                 {/*power slider*/}
                                 <Form.Group className='border' style={{height:"90%"}}>
                                     <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                            onChange={(e, value) => change('attribute_power', value)}/>
+                                            onChangeCommitted={(e, value) => change('attribute_power', value)}/>
                                     <Form.Label style={{fontWeight: "bold"}}>Power</Form.Label>
                                     <p>The ability to produce strength in the shortest possible time</p>
                                 </Form.Group>
@@ -138,7 +108,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*speed slider*/}
                             <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_speed', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_speed', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Speed</Form.Label>
                                 <p>The ability to cover distance quickly.</p>
                             </Form.Group>
@@ -150,7 +120,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*agility slider*/}
                                 <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_agility', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_agility', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Agility</Form.Label>
                                 <p>The ability to change direction quickly.</p>
                             </Form.Group>
@@ -160,7 +130,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*flexibility slider*/}
                             <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_flexibility', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_flexibility', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Flexibility</Form.Label>
                                 <p>The ability to move the joints over a wide range of motion.</p>
                             </Form.Group>
@@ -172,7 +142,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*nerve slider*/}
                                 <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_nerve', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_nerve', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Nerve</Form.Label>
                                 <p>The ability to stay calm and composed in stressful situations.</p>
                             </Form.Group>
@@ -182,7 +152,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*durability slider*/}
                                     <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_durability', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_durability', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Durability</Form.Label>
                                 <p>The ability to withstand physical punishment over a long period of
                                     time.</p>
@@ -195,7 +165,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*hand-eye coordination slider*/}
                                     <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_handeye_coordination', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_handeye_coordination', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Hand-eye Coordination</Form.Label>
                                 <p>The ability to react quickly and accurately to visual stimuli.</p>
                             </Form.Group>
@@ -205,7 +175,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                             {/*analytic aptitude slider*/}
                                         <Form.Group className='border' style={{height:"90%"}}>
                                 <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
-                                        onChange={(e, value) => change('attribute_analytic_aptitude', value)}/>
+                                        onChangeCommitted={(e, value) => change('attribute_analytic_aptitude', value)}/>
                                 <Form.Label style={{fontWeight: "bold"}}>Analytic Aptitude</Form.Label>
                                 <p>The ability to evaluate and react appropriately to strategic
                                     situations.</p>
@@ -226,7 +196,7 @@ function HomeView({talentData, setTalentData, user, setUser}) {
                                 <Modal.Body className={'h3 text-center'}>Successfully
                                     added {talentData.talent_name}!</Modal.Body>
                                 <Modal.Footer>
-                                    <Link to='/talents'>
+                                    <Link to='/'>
                                         <Button variant="danger" onClick={handleClose}>
                                             Submit another talent
                                         </Button>

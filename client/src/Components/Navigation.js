@@ -1,10 +1,13 @@
 import React from 'react';
-import {Nav, Navbar} from "react-bootstrap";
+import {Image, Nav, Navbar} from "react-bootstrap";
+import radarChart from '../Images/radar-chart.png'
 
 function Navigation(props) {
     return (
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Brand href="/">
+                <Image className={'App-logo'} style={{height:'50px',width:'50px'}} src={radarChart}/>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
