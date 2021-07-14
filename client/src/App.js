@@ -12,7 +12,18 @@ import ChartsView from "./Components/ChartsView";
 function App() {
 
     const [user, setUser] = useState({})
-    const [talentData, setTalentData] = useState({})
+    const [talentData, setTalentData] = useState({
+        attribute_endurance: 1,
+        attribute_strength: 1,
+        attribute_power: 1,
+        attribute_speed: 1,
+        attribute_agility: 1,
+        attribute_flexibility: 1,
+        attribute_nerve: 1,
+        attribute_durability: 1,
+        attribute_handeye_coordination: 1,
+        attribute_analytic_aptitude: 1,
+    })
 
   return (
 

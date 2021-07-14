@@ -3,8 +3,7 @@ import {Button, Container, Form} from "react-bootstrap";
 
 function RegisterView(props) {
     return (
-
-        <Container>
+            <div className={'my-auto'}>
             <Form className='col-md-5 mx-auto'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -22,16 +21,13 @@ function RegisterView(props) {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
-        </Container>
+            </div>
 
     );
 }
