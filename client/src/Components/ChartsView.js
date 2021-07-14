@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import Axios from "../Util/Axios";
 import {Col, Form, Row} from "react-bootstrap";
-import axios from "axios";
+import Axios from "../Util/Axios";
 import ChartsAllSportsView from "./ChartsAllSportsView";
 import ChartsSuggestedView from "./ChartsSuggestedView";
 
@@ -30,7 +29,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     async function getAllSports() {
 
         try {
-            let {data} = await axios.get(`http://localhost:8000/sports/`)
+            let {data} = await Axios.get(`http://localhost:8000/sports/`)
             await setAllSports(data)
         } catch (e) {
             console.log(e.response)
@@ -40,7 +39,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     //loads 'Boxing' as the default sport
     async function getSport() {
         try {
-            let {data} = await axios.get(`http://localhost:8000/sports/${sportId}`)
+            let {data} = await Axios.get(`http://localhost:8000/sports/${sportId}`)
             console.log(data)
             await setSportData(data)
         } catch (e) {
@@ -52,7 +51,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     async function getAllTalents() {
 
         try {
-            let {data} = await axios.get(`http://localhost:8000/talents/`)
+            let {data} = await Axios.get(`http://localhost:8000/talents/`)
             await setAllTalents(data)
         } catch (e) {
             console.log(e.response)
@@ -62,7 +61,7 @@ function ChartsView({talentData, setTalentData, user, setUser}) {
     // loads the last talent as the default sport
     async function getTalent() {
         try {
-            let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
+            let {data} = await Axios.get(`http://localhost:8000/talents/${talentId}`)
             console.log(data)
             await setTalentData(data)
         } catch (e) {

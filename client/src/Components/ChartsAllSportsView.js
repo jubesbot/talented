@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import Radar from "react-d3-radar";
-import axios from "axios";
+import Axios from "../Util/Axios";
 
 function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId}) {
     //to work with the form selector
@@ -9,7 +9,7 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
     async function getOneSport(e) {
         e.preventDefault()
         try {
-            let {data} = await axios.get(`http://localhost:8000/sports/${sportId}`)
+            let {data} = await Axios.get(`http://localhost:8000/sports/${sportId}`)
             console.log(data)
             await setSportData(data)
         } catch (e) {
@@ -17,22 +17,11 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
         }
     }
 
-    // async function getOneTalent(e) {
-    //     e.preventDefault()
-    //     try {
-    //         let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
-    //         console.log(data)
-    //         await setTalentData(data)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
-
     async function handleTalentChange(e){
         setTalentId(e.target.value);
         setIsLoading(true)
         try {
-            let {data} = await axios.get(`http://localhost:8000/talents/${e.target.value}`)
+            let {data} = await Axios.get(`http://localhost:8000/talents/${e.target.value}`)
             console.log(data)
             await setTalentData(data)
         } catch (e) {
@@ -46,7 +35,7 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
         setSportId(e.target.value);
         setIsLoading(true)
         try {
-            let {data} = await axios.get(`http://localhost:8000/sports/${e.target.value}`)
+            let {data} = await Axios.get(`http://localhost:8000/sports/${e.target.value}`)
             console.log(data)
             await setSportData(data)
         } catch (e) {

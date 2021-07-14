@@ -13,13 +13,20 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
+@permission_classes([IsAuthenticated])
 class TalentViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Talent.objects.all().order_by('talent_name')
     serializer_class = TalentSerializer
+    
+    def get_queryset(self):
+        print(self.request.user)
+        queryset = Talent.objects.all().filter(scout_id=self.request.user.id).order_by('talent_name')
+        return queryset
 
+@permission_classes([IsAuthenticated])
 class SportViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
