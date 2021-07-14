@@ -5,7 +5,7 @@ import axios from "axios";
 
 function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId}) {
     //to work with the form selector
-
+ const [isLoading, setIsLoading] = useState(false)
     async function getOneSport(e) {
         e.preventDefault()
         try {
@@ -17,39 +17,63 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
         }
     }
 
-    async function getOneTalent(e) {
-        e.preventDefault()
+    // async function getOneTalent(e) {
+    //     e.preventDefault()
+    //     try {
+    //         let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
+    //         console.log(data)
+    //         await setTalentData(data)
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
+
+    async function handleTalentChange(e){
+        setTalentId(e.target.value);
+        setIsLoading(true)
         try {
-            let {data} = await axios.get(`http://localhost:8000/talents/${talentId}`)
+            let {data} = await axios.get(`http://localhost:8000/talents/${e.target.value}`)
             console.log(data)
             await setTalentData(data)
         } catch (e) {
             console.log(e)
+        }finally {
+            setIsLoading(false)
         }
     }
 
-    async function handleChange(e){
-        setTalentId(e.target.value);
+    async function handleSportChange(e){
+        setSportId(e.target.value);
+        setIsLoading(true)
+        try {
+            let {data} = await axios.get(`http://localhost:8000/sports/${e.target.value}`)
+            console.log(data)
+            await setSportData(data)
+        } catch (e) {
+            console.log(e)
+        }finally {
+            setIsLoading(false)
+        }
     }
 
     return (
         <div>
             <Row className='p-3'>
                 <Col className='md-6'>
-                <Form method="get" onSubmit={getOneTalent}>
+                <Form method="get" >
                     <Row>
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label className='h4'>Select Talent<span className='circle talent'></span></Form.Label>
-                                <Form.Control as="select" value={talentId} onChange={handleChange}>
+                                <Form.Control as="select" value={talentId} onChange={handleTalentChange} disabled={isLoading ? "disabled":""}>
                                     {(allTalents && allTalents.length > 0) &&
                                     allTalents.map((talent) => (
                                         <option key={talent.id} value={talent.id}>{talent.talent_name}</option>
                                     ))}
                                 </Form.Control>
                             </Form.Group>
-                            <Button type="submit" className="btn text-center btn-sm talent">Get Talent
-                            </Button>
+                            {/*<Button type="submit" className="btn text-center btn-sm talent">Get Talent*/}
+                            {/*</Button>*/}
                         </Col>
                     </Row>
                 </Form>
@@ -60,19 +84,16 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label className='h4'>Select Sport<span className='circle sport'></span></Form.Label>
-                                <Form.Control as="select" value={sportId} onChange={e => {
-                                    // console.log("e.target.value", typeof e.target.value);
-                                    // getOneSport(e)
-                                    setSportId(e.target.value);
-                                }}>
+                                <Form.Control as="select" value={sportId} onChange={handleSportChange}
+                                >
                                     {(allSports && allSports.length > 0) &&
                                     allSports.map((sport) => (
                                         <option key={sport.id} value={sport.id}>{sport.sport}</option>
                                     ))}
                                 </Form.Control>
                             </Form.Group>
-                            <Button type="submit" className="btn text-center btn-sm sport">Get Sport
-                            </Button>
+                            {/*<Button type="submit" className="btn text-center btn-sm sport">Get Sport*/}
+                            {/*</Button>*/}
                         </Col>
                     </Row>
                 </Form>
