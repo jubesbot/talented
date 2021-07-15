@@ -13,6 +13,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
         attribute_endurance: 8.63,
         attribute_strength: 8.13,
         attribute_power: 8.63,
+        attribute_speed: 6.38,
         attribute_agility: 6.25,
         attribute_flexibility: 4.38,
         attribute_nerve: 8.88,
@@ -66,7 +67,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
     }
 
     useEffect(() => {
-        console.log(allTalents)
+
         getSport()
 
 
@@ -122,8 +123,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
 
             <Row className='h-auto'>
                 <Col className='col-md-7 mx-auto'>
-            {(sportData && talentData && talentData.id) ?
-
+                    {(talentData) ?
             <Radar
                 width={400} height={400} padding={70} domainMax={10} highlighted={null} onHover={(point) => {
                 if (point) {
@@ -181,15 +181,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
                     ],
                 }}
             /> :
-                <div className="jumbotron-fluid vh-100">
-                    <h1 className="display-4">Nothing to see here!</h1>
-                    <p className="lead">Please submit a new talent to begin</p>
-                    <hr className="my-4"/>
-                        <p className="lead">
-                            <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                        </p>
-                </div>
-            }
+                    <></>}
                     </Col>
                 </Row>
 

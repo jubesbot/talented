@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, Nav, Navbar} from "react-bootstrap";
 import radarChart from '../Images/radar-chart.png'
+import {NavLink} from "react-router-dom";
 
-function Navigation({setLoggedIn, loggedIn, setUser, user}) {
+function Navigation({setLoggedIn, loggedIn, setUser, user, talentData, allTalents, setAllTalents}) {
 
     async function logout(){
         setLoggedIn(false)
@@ -19,9 +20,15 @@ function Navigation({setLoggedIn, loggedIn, setUser, user}) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/register">Register</Nav.Link>
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/charts">Charts</Nav.Link>
+                    <NavLink to="/register" className='nav-link'>Register</NavLink>
+                    {(loggedIn)
+                        ? <NavLink to="/" className='nav-link'>Home</NavLink>
+                        : <></>
+                    }
+                    {(allTalents && allTalents.length)
+                        ? <NavLink to="/charts" className='nav-link'>Charts</NavLink>
+                        : <></>
+                    }
                 </Nav>
 
                 {(loggedIn && user.username) ?

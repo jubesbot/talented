@@ -5,12 +5,10 @@ import ChartsAllSportsView from "./ChartsAllSportsView";
 import ChartsSuggestedView from "./ChartsSuggestedView";
 import {Redirect} from "react-router-dom";
 
-function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn}) {
+function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user, setUser, loggedIn, setLoggedIn}) {
 
-    const [allTalents, setAllTalents] = useState({})
     const [allSports, setAllSports] = useState({})
     const [sportId, setSportId] = useState('61')
-
 
     //gets all sports data on page load to be inserted into dropdown bar
     async function getAllSports() {
@@ -25,7 +23,7 @@ function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLogg
 
     //loads 'Boxing' as the default sport
 
-    //gets all sports data on page load to be inserted into dropdown bar
+    // gets all sports data on page load to be inserted into dropdown bar
     async function getAllTalents() {
         try {
             let {data} = await Axios.get(`http://localhost:8000/talents/`)
@@ -41,7 +39,6 @@ function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLogg
     console.log(talentData)
 
     useEffect(() => {
-
         getAllTalents()
         getAllSports()
 
@@ -55,7 +52,6 @@ function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLogg
     return (
 
         <div>
-            {(loggedIn) ?
                 <Row className='border border-warning'>
                     <Col className='col-sm-12 col-xs-12 col-md-12 col-lg-9 border border-primary mx-auto'>
                         <ChartsAllSportsView
@@ -66,6 +62,7 @@ function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLogg
                             talentData={talentData}
                             setTalentData={setTalentData}
                             allTalents={allTalents}
+                            setAllTalents={setAllTalents}
                         />
                     </Col>
                     <Col className='col-sm-12  col-xs-12  col-md-12 col-lg-3 border border-primary mx-auto'>
@@ -81,9 +78,6 @@ function ChartsView({talentData, setTalentData, user, setUser, loggedIn, setLogg
                         />
                     </Col>
                 </Row>
-                :
-                < Redirect to="/"/>
-            }
 
         </div>
     );

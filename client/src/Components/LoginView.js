@@ -3,7 +3,7 @@ import Axios from "../Util/Axios";
 import {Button, Container, Form} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 
-function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentData}) {
+function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentData, allTalents, setAllTalents}) {
 
     useEffect(() => {
         if (loggedIn){

@@ -6,7 +6,7 @@ from .serializers import UserSerializer, TalentSerializer, SportSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.

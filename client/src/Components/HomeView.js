@@ -4,10 +4,9 @@ import Axios from "../Util/Axios";
 import {Form, Row, Col, Container, Modal, Button} from "react-bootstrap";
 import {Slider, Typography} from "@material-ui/core";
 
-function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn}) {
+function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn, allTalents, setAllTalents}) {
     const form = useRef(null)
     const target = useRef(null)
-
 
     const [show, setShow] = useState(false);
 
