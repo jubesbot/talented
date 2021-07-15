@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,13 +88,15 @@ WSGI_APPLICATION = 'talented_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'talented_development',
-        'USER' : 'apple', # postgres
-        'HOST' : 'localhost',
-        'PORT' : 5432
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'talented_development',
+        # 'USER' : 'apple', # postgres
+        # 'HOST' : 'localhost',
+        # 'PORT' : 5432
     }
 }
+
+DATABASES['default'] = dj_database_url.config(default='postgres://zwnvplxhrczsks:7b0fd5e26a0b04ec6f91168468a748f3d34af3e8b5a6a187e67a4788a85d99f5@ec2-52-2-118-38.compute-1.amazonaws.com:5432/decdheu0tmpl17')
 
 
 # Password validation
@@ -115,14 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.AllowAny'
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     # 'rest_framework.permissions.IsAuthenticated',
+    #     'rest_framework.permissions.AllowAny'
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
