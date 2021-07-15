@@ -25,7 +25,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
 
     async function getSport() {
         try {
-            let {data} = await Axios.get(`http://localhost:8000/sports/${sportId}`)
+            let {data} = await Axios.get(`/sports/${sportId}`)
             console.log(data)
             setSportData(data)
         } catch (e) {
@@ -37,7 +37,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
     async function getOneSport(e) {
         e.preventDefault()
         try {
-            let {data} = await Axios.get(`http://localhost:8000/sports/${sportId}`)
+            let {data} = await Axios.get(`/sports/${sportId}`)
             console.log(data)
             await setSportData(data)
         } catch (e) {
@@ -56,7 +56,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
         setSportId(e.target.value);
         setIsLoading(true)
         try {
-            let {data} = await Axios.get(`http://localhost:8000/sports/${e.target.value}`)
+            let {data} = await Axios.get(`/sports/${e.target.value}`)
             console.log(data)
             await setSportData(data)
         } catch (e) {

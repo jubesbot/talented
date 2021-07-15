@@ -28,7 +28,7 @@ function App() {
 
     async function getAllTalents() {
         try {
-            let {data} = await Axios.get(`http://localhost:8000/talents/`)
+            let {data} = await Axios.get(`/talents/`)
             setAllTalents(data)
             console.log(data)
         } catch (e) {
@@ -39,7 +39,7 @@ function App() {
     useEffect(() => {
         async function setUserStats() {
             try {
-                let {data} = await Axios.get("http://localhost:8000/users/")
+                let {data} = await Axios.get("/users/")
                 console.log(data)
                 setTalentData(prevState => ({...prevState, scout: data[0].id}))
                 setUser(data[0])

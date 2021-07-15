@@ -1,0 +1,1 @@
+web: gunicorn talented_proj.wsgi --log-file -

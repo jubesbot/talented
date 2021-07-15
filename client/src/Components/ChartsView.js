@@ -14,7 +14,7 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
     async function getAllSports() {
 
         try {
-            let {data} = await Axios.get(`http://localhost:8000/sports/`)
+            let {data} = await Axios.get(`/sports/`)
             await setAllSports(data)
         } catch (e) {
             console.log(e.response)
@@ -26,7 +26,7 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
     // gets all sports data on page load to be inserted into dropdown bar
     async function getAllTalents() {
         try {
-            let {data} = await Axios.get(`http://localhost:8000/talents/`)
+            let {data} = await Axios.get(`/talents/`)
                 setAllTalents(data)
             console.log(data)
         } catch (e) {

@@ -1,4 +1,7 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
+# from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import routers
 from talented_app import views
 from rest_framework_simplejwt.views import (
@@ -19,3 +22,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+# urlpatterns +=(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

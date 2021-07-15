@@ -16,7 +16,7 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
     async function submitTalent(e) {
         e.preventDefault(e)
         try {
-            let res = await Axios.post(`http://localhost:8000/talents/`, talentData, {})
+            let res = await Axios.post(`/talents/`, talentData, {})
             console.log(res)
             //get response
         } catch (e) {
