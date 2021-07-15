@@ -5,14 +5,16 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, TalentSerializer, SportSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         print(self.request.user)

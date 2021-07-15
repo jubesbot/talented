@@ -36,6 +36,19 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
 
     // loads the last talent as the default sport
 
+    useEffect(()=>{
+        async function setUserStats() {
+            try {
+                let {data} = await Axios.get("api/users/")
+                console.log(data)
+                setUser(data[0])
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        setUserStats()
+    },[])
+
     useEffect(() => {
         getAllTalents()
         getAllSports()
@@ -48,8 +61,8 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
     return (
 
         <div>
-                <Row className='border border-warning'>
-                    <Col className='col-sm-12 col-xs-12 col-md-12 col-lg-9 border border-primary mx-auto'>
+                <Row className={'d-flex'}>
+                    <Col className='my-auto vh-100 col-sm-12 col-xs-12 col-md-9 col-lg-9 border-right border-warning mx-auto'>
                         <ChartsAllSportsView
                             allSports={allSports}
                             setAllSports={setAllSports}
@@ -61,7 +74,7 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
                             setAllTalents={setAllTalents}
                         />
                     </Col>
-                    <Col className='col-sm-12  col-xs-12  col-md-12 col-lg-3 border border-primary mx-auto'>
+                    <Col className='col-sm-12  col-xs-12  col-md-3 col-lg-3 mx-auto'>
                         <ChartsSuggestedView
                             allSports={allSports}
                             setAllSports={setAllSports}

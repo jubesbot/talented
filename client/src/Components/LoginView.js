@@ -8,7 +8,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
     useEffect(() => {
         if (loggedIn){
             console.log('logged in cos I got both tokens :)')
-            setTalentData(prevState => ({...prevState, scout_id: user.id}))
+            setTalentData(prevState => ({...prevState, scout: user.id}))
         }else{
             console.log('not logged in cos I no tokens :(')
             return < Redirect to="/login" />
@@ -24,7 +24,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
             localStorage.setItem("refresh", data.refresh)
             console.log(data)
             setLoggedIn(true)
-            setTalentData(prevState => ({...prevState, scout_id: user.id}))
+            setTalentData(prevState => ({...prevState, scout: user.id}))
         } catch (e) {
             console.log(e)
             alert('try again!')

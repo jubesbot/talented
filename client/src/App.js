@@ -43,7 +43,7 @@ function App() {
 
   return (
 
-    <div className="App">
+    <div className="App overflow-hidden">
 
         <BrowserRouter>
             <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} talentData={talentData} setTalentData={setTalentData} allTalents={allTalents} setAllTalents={setAllTalents} />

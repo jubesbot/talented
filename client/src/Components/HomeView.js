@@ -65,8 +65,8 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
                 <h5 className="text-center m-2"> Add a New Talent:</h5>
                 <Form ref={form} id="form" onSubmit={submitTalent} method="post">
                     <Row className="justify-content-center mx-auto text-center">
-                        <Col className='col-md-12'>
-                            <Form.Group controlId="exampleForm.ControlInput1">
+                        <Col className='col-lg-10'>
+                            <Form.Group controlId="exampleForm.ControlInput1" className={'col-md-6 mx-auto pb-2'}>
                                 <Form.Control name="talent_name" placeholder="Enter talent's name" onChange={handleChange}
                                               required={true}/>
                             </Form.Group>
@@ -187,10 +187,10 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
                             </Row>
 
                             {(talentData && talentData?.talent_name) ?
-                                <Button type="submit" className="btn btn-warning text-center btn-sm" onClick={handleShow}>
+                                <Button type="submit" className="btn btn-danger text-center btn-sm" onClick={handleShow}>
                                     Submit
                                 </Button> :
-                                <Button type="submit" className="btn btn-warning text-center btn-sm suggest" disabled={true}>
+                                <Button type="submit" className="btn btn-danger text-center btn-sm suggest" disabled={true}>
                                     Submit
                                 </Button>
                             }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Radar from "react-d3-radar";
-import {Button, Col, ListGroup} from "react-bootstrap";
+import {Button, Col, ListGroup, Spinner} from "react-bootstrap";
 
 function ChartsSuggestedView({
                                  sportData,
@@ -66,20 +66,25 @@ function ChartsSuggestedView({
 
 return (
     <div>
-        <div className='header'>
-            <h4 className='title m-3'>Find out what are some of {talentData?.talent_name}'s suggested sports!</h4>
-            <Button className='btn text-center btn-sm suggest' onClick={suggestSport}>Get Suggestions</Button>
-            <div className='scroll mt-3'>
-            {(filter && filter.length > 0) &&
-            filter.map((sport) => (
-                <ListGroup className='p-2'>
-                <ListGroup.Item variant='danger' key={sport.id}>{sport}</ListGroup.Item>
-                </ListGroup>
-            ))}
-            </div>
-        </div>
-        <div>
-        </div>
+        {(talentData) ?
+            <div className='header'>
+                <h4 className='title m-3'>Find out what are some of {talentData?.talent_name}'s suggested sports!</h4>
+                <Button className='btn text-center btn-sm suggest' onClick={suggestSport}>Get Suggestions</Button>
+                <div className='scroll mt-3'>
+                    {(filter && filter.length > 0) &&
+                    filter.map((sport) => (
+                        <ListGroup className='p-2'>
+                            <ListGroup.Item variant='danger' key={sport.id}>{sport}</ListGroup.Item>
+                        </ListGroup>
+                    ))}
+                </div>
+            </div>:
+            <div className={'align-middle'}>
+            CONTENT LOADING
+            <Spinner animation="grow" size="sm" />
+            <Spinner animation="grow" size="sm" />
+            <Spinner animation="grow" size="sm" />
+            </div>}
 
     </div>
 );

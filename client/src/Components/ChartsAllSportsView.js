@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row, Spinner} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import Axios from "../Util/Axios";
 
@@ -93,8 +93,6 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
                                     ))}
                                 </Form.Control>
                             </Form.Group>
-                            {/*<Button type="submit" className="btn text-center btn-sm talent">Get Talent*/}
-                            {/*</Button>*/}
                         </Col>
                     </Row>
                 </Form>
@@ -113,8 +111,6 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
                                     ))}
                                 </Form.Control>
                             </Form.Group>
-                            {/*<Button type="submit" className="btn text-center btn-sm sport">Get Sport*/}
-                            {/*</Button>*/}
                         </Col>
                     </Row>
                 </Form>
@@ -181,7 +177,12 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
                     ],
                 }}
             /> :
-                    <></>}
+                    <>
+                        CONTENT LOADING
+                        <Spinner animation="grow" size="sm" />
+                        <Spinner animation="grow" size="sm" />
+                        <Spinner animation="grow" size="sm" />
+                    </>}
                     </Col>
                 </Row>
 
