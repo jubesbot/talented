@@ -19,7 +19,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
     async function login(e){
         e.preventDefault()
         try {
-            let {data} = await Axios.post("/api/token/", {username: user.username, password:user.password})
+            let {data} = await Axios.post("api/token/", {username: user.username, password:user.password})
             localStorage.setItem("access", data.access)
             localStorage.setItem("refresh", data.refresh)
             console.log(data)

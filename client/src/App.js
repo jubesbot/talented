@@ -26,33 +26,20 @@ function App() {
         attribute_analytic_aptitude: 1,
     })
 
-    async function getAllTalents() {
-        try {
-            let {data} = await Axios.get(`/talents/`)
-            setAllTalents(data)
-            console.log(data)
-        } catch (e) {
-            console.log(e.response)
-        }
-    }
-
-    useEffect(() => {
-        async function setUserStats() {
+    useEffect(()=>{
+        async function getAllTalents() {
             try {
-                let {data} = await Axios.get("/users/")
+                let {data} = await Axios.get(`api/talents/`)
                 console.log(data)
-                setTalentData(prevState => ({...prevState, scout: data[0].id}))
-                setUser(data[0])
+                setAllTalents(data)
             } catch (e) {
-                console.log(e)
+                console.log(e.response)
             }
         }
-        setUserStats()
-    }, [])
 
-    useEffect(()=>{
         getAllTalents()
-    },[loggedIn])
+
+    },[user])
 
   return (
 

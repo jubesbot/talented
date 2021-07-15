@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, Nav, Navbar} from "react-bootstrap";
 import radarChart from '../Images/radar-chart.png'
 import {NavLink} from "react-router-dom";
+import Axios from "../Util/Axios";
 
 function Navigation({setLoggedIn, loggedIn, setUser, user, talentData, allTalents, setAllTalents}) {
 
@@ -19,8 +20,10 @@ function Navigation({setLoggedIn, loggedIn, setUser, user, talentData, allTalent
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
+
                 <Nav className="mr-auto">
                     <NavLink to="/register" className='nav-link'>Register</NavLink>
+
                     {(loggedIn)
                         ? <NavLink to="/" className='nav-link'>Home</NavLink>
                         : <></>
@@ -31,12 +34,11 @@ function Navigation({setLoggedIn, loggedIn, setUser, user, talentData, allTalent
                     }
                 </Nav>
 
-                {(loggedIn && user.username) ?
-                <Navbar.Text>
-                    Signed in as: <span className='font-weight-bold' style={{color:'green'}}>{user.username}</span>
-                    <a onClick={logout} href="/login" className='ml-5'>Logout</a>
-                </Navbar.Text> :
-                    <Navbar.Text>
+                {(loggedIn && user)
+                    ? <Navbar.Text>Signed in as: <span className='font-weight-bold' style={{color:'green'}}>{user.username}</span>
+                        <a onClick={logout} href="/login" className='ml-5'>Logout</a>
+                </Navbar.Text>
+                    : <Navbar.Text>
                         <a onClick={logout} href="/login" className='ml-5'>Login</a>
                     </Navbar.Text>}
             </Navbar.Collapse>

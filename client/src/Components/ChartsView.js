@@ -8,13 +8,13 @@ import {Redirect} from "react-router-dom";
 function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user, setUser, loggedIn, setLoggedIn}) {
 
     const [allSports, setAllSports] = useState({})
-    const [sportId, setSportId] = useState('61')
+    const [sportId, setSportId] = useState('1')
 
     //gets all sports data on page load to be inserted into dropdown bar
-    async function getAllSports() {
 
+    async function getAllSports() {
         try {
-            let {data} = await Axios.get(`/sports/`)
+            let {data} = await Axios.get(`api/sports/`)
             await setAllSports(data)
         } catch (e) {
             console.log(e.response)
@@ -26,8 +26,8 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
     // gets all sports data on page load to be inserted into dropdown bar
     async function getAllTalents() {
         try {
-            let {data} = await Axios.get(`/talents/`)
-                setAllTalents(data)
+            let {data} = await Axios.get(`api/talents/`)
+            setAllTalents(data)
             console.log(data)
         } catch (e) {
             console.log(e.response)
@@ -36,16 +36,12 @@ function ChartsView({talentData, setTalentData, allTalents, setAllTalents, user,
 
     // loads the last talent as the default sport
 
-    console.log(talentData)
-
     useEffect(() => {
         getAllTalents()
         getAllSports()
-
     }, [])
 
     console.log(sportId)
-    console.log(talentData)
     console.log(allSports.length)
     console.log(allTalents.length)
 

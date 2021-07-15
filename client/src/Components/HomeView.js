@@ -13,16 +13,19 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    async function submitTalent(e) {
-        e.preventDefault(e)
-        try {
-            let res = await Axios.post(`/talents/`, talentData, {})
-            console.log(res)
-            //get response
-        } catch (e) {
-            console.log(e)
+    useEffect(()=>{
+        async function setUserStats() {
+            try {
+                let {data} = await Axios.get("api/users/")
+                console.log(data)
+                setUser(data[0])
+                setTalentData(prevState => ({...prevState, scout : data[0].id}))
+            } catch (e) {
+                console.log(e)
+            }
         }
-    }
+        setUserStats()
+    },[])
 
     async function change(name, newValue) {
         // console.log(document.querySelector("input[name=attribute_endurance]"))
@@ -44,6 +47,17 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
         }
     }
     console.log(talentData)
+
+    async function submitTalent(e) {
+        e.preventDefault(e)
+        try {
+            let res = await Axios.post(`api/talents/`, talentData, {})
+            console.log(res)
+            //get response
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <div>
@@ -89,7 +103,7 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
                                     <Slider valueLabelDisplay="auto" min={1} max={10} defaultValue={1} step={0.01}
                                             onChangeCommitted={(e, value) => change('attribute_power', value)}/>
                                     <Form.Label style={{fontWeight: "bold"}}>Power</Form.Label>
-                                    <p>The ability to produce strength in the shortest possible time</p>
+                                    <p>The ability to produce strength in the shortest possible time.</p>
                                 </Form.Group>
                                 </Col>
 
