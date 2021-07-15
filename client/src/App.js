@@ -14,35 +14,32 @@ function App() {
     const [loggedIn, setLoggedIn] = useState((localStorage.access && localStorage.refresh) ? true : false)
     const [user, setUser] = useState({})
     const [talentData, setTalentData] = useState({
-        attribute_endurance: 1,
-        attribute_strength: 1,
-        attribute_power: 1,
-        attribute_speed: 1,
-        attribute_agility: 1,
-        attribute_flexibility: 1,
-        attribute_nerve: 1,
-        attribute_durability: 1,
-        attribute_handeye_coordination: 1,
-        attribute_analytic_aptitude: 1,
     })
 
     useEffect(() => {
-            if (loggedIn){
-                console.log('logged in cos I got both tokens :)')
-                setTalentData(prevState => ({...prevState, scout_id: user.id}))
-            }else{
-                console.log('not logged in cos I no tokens :(')
-                return < redirect push to="/login" />
+        async function setUserStats() {
+            try {
+                let {data} = await Axios.get("http://localhost:8000/users/")
+                console.log(data)
+                setTalentData(prevState => ({...prevState, scout: data[0].id}))
+                setUser(data[0])
+            } catch (e) {
+                console.log(e)
             }
-    }, [])
+        }
+
+        setUserStats()
+    }, [loggedIn])
+
     console.log(talentData)
+    console.log(user)
 
   return (
 
     <div className="App">
 
         <BrowserRouter>
-            <Navigation />
+            <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} setUser={setUser} talentData={talentData} setTalentData={setTalentData} />
             <div>
                 <Switch>
                     <Route path="/register" exact>

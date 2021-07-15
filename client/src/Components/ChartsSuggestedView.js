@@ -12,9 +12,7 @@ function ChartsSuggestedView({
                                  talentData,
                                  allTalents,
                                  setAllTalents,
-                                 talentId,
                                  setTalentData,
-                                 setTalentId,
                                  loggedIn,
                                  setLoggedIn
                              }) {
@@ -69,7 +67,7 @@ function ChartsSuggestedView({
 return (
     <div>
         <div className='header'>
-            <h4 className='title m-3'>Find out what are some of {talentData.talent_name}'s suggested sports!</h4>
+            <h4 className='title m-3'>Find out what are some of {talentData?.talent_name}'s suggested sports!</h4>
             <Button className='btn text-center btn-sm suggest' onClick={suggestSport}>Get Suggestions</Button>
             <div className='scroll mt-3'>
             {(filter && filter.length > 0) &&

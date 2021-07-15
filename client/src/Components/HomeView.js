@@ -8,21 +8,11 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
     const form = useRef(null)
     const target = useRef(null)
 
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    useEffect(() => {
-        if (loggedIn){
-            console.log('logged in cos I got both tokens :)')
-            setTalentData(prevState => ({...prevState, scout_id: user.id}))
-        }else{
-            console.log('not logged in cos I no tokens :(')
-            return < Redirect to="/login" />
-        }
-    }, [])
-    console.log(talentData)
 
     async function submitTalent(e) {
         e.preventDefault(e)
@@ -54,7 +44,7 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
             console.log(e)
         }
     }
-
+    console.log(talentData)
 
     return (
         <div>
@@ -183,7 +173,7 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
                                     </Col>
                             </Row>
 
-                            {(talentData && talentData.talent_name) ?
+                            {(talentData && talentData?.talent_name) ?
                                 <Button type="submit" className="btn btn-warning text-center btn-sm" onClick={handleShow}>
                                     Submit
                                 </Button> :
@@ -194,7 +184,7 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
 
                             <Modal show={show} onHide={handleClose} animation={false}>
                                 <Modal.Body className={'h3 text-center'}>Successfully
-                                    added {talentData.talent_name}!</Modal.Body>
+                                    added {talentData?.talent_name}!</Modal.Body>
                                 <Modal.Footer>
                                     <Link to='/'>
                                         <Button variant="danger" onClick={handleClose}>

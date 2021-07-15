@@ -3,9 +3,36 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import Axios from "../Util/Axios";
 
-function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, sportId, setSportId, talentData, allTalents, setAllTalents, talentId, setTalentData, setTalentId, loggedIn, setLoggedIn}) {
+function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTalents, setTalentData}) {
     //to work with the form selector
- const [isLoading, setIsLoading] = useState(false)
+    const [talentId, setTalentId] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+    const [sportData, setSportData] = useState({
+        id: 61,
+        sport: "Boxing",
+        attribute_endurance: 8.63,
+        attribute_strength: 8.13,
+        attribute_power: 8.63,
+        attribute_agility: 6.25,
+        attribute_flexibility: 4.38,
+        attribute_nerve: 8.88,
+        attribute_durability: 8.50,
+        attribute_handeye_coordination: 7.00,
+        attribute_analytic_aptitude: 5.63,
+        total: 72.38,
+    })
+
+    async function getSport() {
+        try {
+            let {data} = await Axios.get(`http://localhost:8000/sports/${sportId}`)
+            console.log(data)
+            setSportData(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
     async function getOneSport(e) {
         e.preventDefault()
         try {
@@ -18,18 +45,11 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
     }
 
     async function handleTalentChange(e){
-        setTalentId(e.target.value);
-        setIsLoading(true)
-        try {
-            let {data} = await Axios.get(`http://localhost:8000/talents/${e.target.value}`)
-            console.log(data)
-            await setTalentData(data)
-        } catch (e) {
-            console.log(e)
-        }finally {
-            setIsLoading(false)
+        let data = allTalents.find(talent => talent.id === parseInt(e.target.value))
+        setTalentData(data)
         }
-    }
+
+
 
     async function handleSportChange(e){
         setSportId(e.target.value);
@@ -45,6 +65,17 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
         }
     }
 
+    useEffect(() => {
+        console.log(allTalents)
+        getSport()
+
+
+    }, [])
+
+    useEffect(()=>{
+        setTalentData(allTalents[0])
+    },[allTalents])
+
     return (
         <div>
             <Row className='p-3'>
@@ -54,10 +85,10 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label className='h4'>Select Talent<span className='circle talent'></span></Form.Label>
-                                <Form.Control as="select" value={talentId} onChange={handleTalentChange} disabled={isLoading ? "disabled":""}>
+                                <Form.Control as="select" onChange={handleTalentChange} disabled={isLoading ? "disabled":""}>
                                     {(allTalents && allTalents.length > 0) &&
                                     allTalents.map((talent) => (
-                                        <option key={talent.id} value={talent.id}>{talent.talent_name}</option>
+                                        <option key={talent.id} value={talent.id}>{talent?.talent_name}</option>
                                     ))}
                                 </Form.Control>
                             </Form.Group>
@@ -149,7 +180,15 @@ function ChartsAllSportsView({sportData, setSportData, allSports, setAllSports, 
                         },
                     ],
                 }}
-            /> : <>Rendering...</>
+            /> :
+                <div className="jumbotron-fluid vh-100">
+                    <h1 className="display-4">Nothing to see here!</h1>
+                    <p className="lead">Please submit a new talent to begin</p>
+                    <hr className="my-4"/>
+                        <p className="lead">
+                            <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                        </p>
+                </div>
             }
                     </Col>
                 </Row>

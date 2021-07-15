@@ -4,17 +4,6 @@ import {Redirect} from "react-router-dom";
 
 function RegisterView({loggedIn, setLoggedIn, user, setUser, setTalentData, talentData}) {
 
-    useEffect(() => {
-        if (loggedIn){
-            console.log('logged in cos I got both tokens :)')
-            setTalentData(prevState => ({...prevState, scout_id: user.id}))
-        }else{
-            console.log('not logged in cos I no tokens :(')
-            return < Redirect to="/login" />
-        }
-    }, [])
-    console.log(talentData)
-
     return (
             <div className={'my-auto'}>
             <Form className='col-md-5 mx-auto'>

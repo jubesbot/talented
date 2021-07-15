@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
 from .models import Talent, Sport
 from rest_framework import viewsets
 from .serializers import UserSerializer, TalentSerializer, SportSerializer
@@ -12,6 +13,11 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        print(self.request.user)
+        queryset = User.objects.all().filter(username=self.request.user).order_by('username')
+        return queryset
 
 @permission_classes([IsAuthenticated])
 class TalentViewSet(viewsets.ModelViewSet):

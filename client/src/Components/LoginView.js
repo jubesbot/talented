@@ -62,7 +62,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
                     <Form.Control id='password' type="password" placeholder="Enter password" onChange={handleChange}/>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">Login</Button>
+                <Button variant="primary" type="submit">Submit</Button>
 
             </Form>
 
