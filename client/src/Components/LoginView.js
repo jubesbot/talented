@@ -47,7 +47,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
     }
 
     return (
-        <div>
+        <div style={{marginTop:"15%"}}>
             <h3>Login</h3>
 
             <Form onSubmit={login} className='col-md-5 mx-auto'>

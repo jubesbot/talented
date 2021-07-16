@@ -39,7 +39,7 @@ function RegisterView({loggedIn, setLoggedIn, user, setUser, setTalentData, tale
     }
 
     return (
-    <div>
+    <div style={{marginTop:"15%"}}>
         <Row>
         <Col className={'col-md-6 mx-auto my-auto'}>
         <h3>Sign up here</h3>

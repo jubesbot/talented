@@ -14,6 +14,10 @@
     animation: App-logo-spin infinite 10s linear;
   }
 }
+.tab-logo {
+  animation: tab-logo-spin infinite 10s linear;
+}
+
 
 .App-header {
   background-color: #282c34;
