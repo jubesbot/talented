@@ -1,10 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {Link, Redirect} from "react-router-dom";
+import React, {useRef} from 'react';
+import {Button, Col, Form, Row} from "react-bootstrap";
 import Axios from "../Util/Axios";
 import { useHistory } from 'react-router-dom';
 
-function RegisterView({loggedIn, setLoggedIn, user, setUser, setTalentData, talentData}) {
+function RegisterView({user, setUser}) {
 
     const form = useRef(null)
     const history = useHistory()
@@ -20,7 +19,6 @@ function RegisterView({loggedIn, setLoggedIn, user, setUser, setTalentData, tale
             })
             localStorage.setItem("access", data.access)
             localStorage.setItem("refresh", data.refresh)
-            console.log(data)
             history.push('/login')
         } catch (e) {
             console.log(e)
@@ -30,9 +28,7 @@ function RegisterView({loggedIn, setLoggedIn, user, setUser, setTalentData, tale
 
     async function handleChange(e) {
         try {
-            console.log(e.target.id)
             await setUser(prevState => ({...prevState, [e.target.id]: e.target.value}))
-            console.log(user)
         } catch (e) {
             console.log(e)
         }

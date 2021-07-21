@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Image, Nav, Navbar} from "react-bootstrap";
 import radarChart from '../Images/radar-chart.png'
 import {NavLink} from "react-router-dom";
-import Axios from "../Util/Axios";
 
-function Navigation({setLoggedIn, loggedIn, setUser, user, talentData, allTalents, setAllTalents}) {
+function Navigation({setLoggedIn, loggedIn, setUser, user, allTalents}) {
 
     async function logout(){
         setLoggedIn(false)

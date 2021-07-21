@@ -1,20 +1,17 @@
 import React, {useEffect} from 'react';
 import Axios from "../Util/Axios";
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 
 function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentData, allTalents, setAllTalents}) {
 
     useEffect(() => {
         if (loggedIn){
-            console.log('logged in cos I got both tokens :)')
             setTalentData(prevState => ({...prevState, scout: user.id}))
         }else{
-            console.log('not logged in cos I no tokens :(')
             return < Redirect to="/login" />
         }
     }, [])
-    console.log(talentData)
 
     async function login(e){
         e.preventDefault()
@@ -22,7 +19,6 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
             let {data} = await Axios.post("api/token/", {username: user.username, password:user.password})
             localStorage.setItem("access", data.access)
             localStorage.setItem("refresh", data.refresh)
-            console.log(data)
             setLoggedIn(true)
             setTalentData(prevState => ({...prevState, scout: user.id}))
         } catch (e) {
@@ -38,9 +34,7 @@ function LoginView({loggedIn, setLoggedIn, user, setUser, talentData, setTalentD
 
     async function handleChange(e) {
         try {
-            console.log(e.target.id)
             await setUser(prevState => ({...prevState, [e.target.id]: e.target.value}))
-            console.log(user)
         } catch (e) {
             console.log(e)
         }

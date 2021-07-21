@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import './App.css';
 import Axios from './Util/Axios';
-import { Navbar, Container, Nav, Form, Button, } from 'react-bootstrap'
 import Navigation from "./Components/Navigation";
 import HomeView from "./Components/HomeView";
 import LoginView from "./Components/LoginView";
@@ -30,10 +29,9 @@ function App() {
         async function getAllTalents() {
             try {
                 let {data} = await Axios.get(`api/talents/`)
-                console.log(data)
                 setAllTalents(data)
             } catch (e) {
-                console.log(e.response)
+                // console.log(e.response)
             }
         }
 

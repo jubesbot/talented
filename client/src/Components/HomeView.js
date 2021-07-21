@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Axios from "../Util/Axios";
-import {Form, Row, Col, Container, Modal, Button} from "react-bootstrap";
-import {Slider, Typography} from "@material-ui/core";
+import {Form, Row, Col, Modal, Button} from "react-bootstrap";
+import {Slider} from "@material-ui/core";
 
-function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLoggedIn, allTalents, setAllTalents}) {
+function HomeView({talentData, setTalentData, setUser}) {
     const form = useRef(null)
-    const target = useRef(null)
 
     const [show, setShow] = useState(false);
 
@@ -17,7 +16,6 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
         async function setUserStats() {
             try {
                 let {data} = await Axios.get("api/users/")
-                console.log(data)
                 setUser(data[0])
                 setTalentData(prevState => ({...prevState, scout : data[0].id}))
             } catch (e) {
@@ -28,11 +26,8 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
     },[])
 
     async function change(name, newValue) {
-        // console.log(document.querySelector("input[name=attribute_endurance]"))
-        console.log(newValue)
         try {
             await setTalentData(prevState => ({...prevState, [name]: newValue}))
-            console.log(talentData)
         } catch (e) {
             console.log(e)
         }
@@ -41,18 +36,15 @@ function HomeView({talentData, setTalentData, user, setUser, loggedIn, setLogged
     async function handleChange(e) {
         try {
             await setTalentData(prevState => ({...prevState, [e.target.name]: e.target.value}))
-            console.log(talentData)
         } catch (e) {
             console.log(e)
         }
     }
-    console.log(talentData)
 
     async function submitTalent(e) {
         e.preventDefault(e)
         try {
             let res = await Axios.post(`api/talents/`, talentData, {})
-            console.log(res)
             //get response
         } catch (e) {
             console.log(e)

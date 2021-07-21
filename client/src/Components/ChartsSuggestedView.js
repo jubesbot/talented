@@ -1,21 +1,7 @@
 import React, {useState} from 'react';
-import Radar from "react-d3-radar";
 import {Button, Col, ListGroup, Spinner} from "react-bootstrap";
 
-function ChartsSuggestedView({
-                                 sportData,
-                                 setSportData,
-                                 allSports,
-                                 setAllSports,
-                                 sportId,
-                                 setSportId,
-                                 talentData,
-                                 allTalents,
-                                 setAllTalents,
-                                 setTalentData,
-                                 loggedIn,
-                                 setLoggedIn
-                             }) {
+function ChartsSuggestedView({allSports, talentData}) {
 
     const [filter, setFilter] = useState({})
 
@@ -62,7 +48,6 @@ function ChartsSuggestedView({
         }
         setFilter(setLeniency(temp,5))
     }
-    console.log(filter)
 
 return (
     <div>

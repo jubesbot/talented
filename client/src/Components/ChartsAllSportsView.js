@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Row, Spinner} from "react-bootstrap";
+import {Col, Form, Row, Spinner} from "react-bootstrap";
 import Radar from "react-d3-radar";
 import Axios from "../Util/Axios";
 
 function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTalents, setTalentData}) {
     //to work with the form selector
-    const [talentId, setTalentId] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const [sportData, setSportData] = useState({
         id: 61,
@@ -26,7 +25,6 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
     async function getSport() {
         try {
             let {data} = await Axios.get(`api/sports/${sportId}`)
-            console.log(data)
             setSportData(data)
         } catch (e) {
             console.log(e)
@@ -38,8 +36,7 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
         e.preventDefault()
         try {
             let {data} = await Axios.get(`api/sports/${sportId}`)
-            console.log(data)
-            await setSportData(data)
+            setSportData(data)
         } catch (e) {
             console.log(e)
         }
@@ -50,15 +47,12 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
         setTalentData(data)
         }
 
-
-
     async function handleSportChange(e){
         setSportId(e.target.value);
         setIsLoading(true)
         try {
             let {data} = await Axios.get(`/api/sports/${e.target.value}`)
-            console.log(data)
-            await setSportData(data)
+            setSportData(data)
         } catch (e) {
             console.log(e)
         }finally {
@@ -69,7 +63,6 @@ function ChartsAllSportsView({allSports, sportId, setSportId, talentData, allTal
     useEffect(() => {
 
         getSport()
-
 
     }, [])
 
